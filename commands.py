@@ -86,8 +86,9 @@ class SetNamedMark(sublime_plugin.TextCommand):
 
 class UnsetNamedMark(sublime_plugin.TextCommand):
   def run(self, edit, names = ['user', 'user_fallback', 'mark']):
-    regions = self.view.get_regions(name)
-    if len(regions) == 0:
-      return
+    for name in names:
+      regions = self.view.get_regions(name)
+      if len(regions) == 0:
+        continue
 
-    self.view.erase_regions(name)
+      self.view.erase_regions(name)
